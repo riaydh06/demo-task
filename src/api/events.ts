@@ -5,7 +5,7 @@ import api from '@helpers/api';
 import { normalizePagination } from '@helpers/normalize-pagination';
 import { generateEvents } from './mock/events';
 import { Pagination } from './types';
-import { EventsType } from '../types/events';
+import { EventType } from '../types/events';
 
 export const createEvents = (() => {
   const cancelToken = axios.CancelToken;
@@ -43,8 +43,8 @@ export const getEvents = (() => {
 
   return async (
     page: number,
-    pageSize: number = 10,
-  ): Promise<{ data: EventsType[]; pagination: Pagination }> => {
+    pageSize: number = 5,
+  ): Promise<{ data: EventType[]; pagination: Pagination }> => {
     if (process.env.REACT_APP_GET_EVENTS_DISABLED === 'true') {
       const { meta, result } = generateEvents(page, pageSize);
       return new Promise((resolve) => {

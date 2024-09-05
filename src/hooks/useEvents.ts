@@ -5,16 +5,20 @@ import { EventsState } from '@reducers/types/event-state';
 import { useEffect } from 'react';
 import { createEventRequest } from '@reducers/events/create-event-reducer';
 import { getEventsRequest } from '@reducers/events/get-events-reducer';
-import { EventsType } from '@type/events';
+import { EventType } from '@type/events';
 
 interface UseEvents {
   createRequested: boolean;
   createSuccess: boolean;
-  events: EventsType[];
-  createEvents: (event: EventsType) => void;
+  events: EventType[];
+  createEvents: (event: EventType) => void;
 }
 
-export const useEvents = (): UseEvents => {
+export const useEvents = ({
+  isOnMount,
+}: {
+  isOnMount?: boolean;
+}): UseEvents => {
   const dispatch = useDispatch();
   const { getEvents, createEvent } =
     useAppSelector<EventsState>(getEventsState);
@@ -24,10 +28,12 @@ export const useEvents = (): UseEvents => {
   const events = getEvents.data || [];
 
   useEffect(() => {
-    dispatch(getEventsRequest({}));
-  }, [dispatch]);
+    if (isOnMount) {
+      dispatch(getEventsRequest({}));
+    }
+  }, [dispatch, isOnMount]);
 
-  const createEvents = (event: EventsType) =>
+  const createEvents = (event: EventType) =>
     dispatch(createEventRequest(event));
 
   return {

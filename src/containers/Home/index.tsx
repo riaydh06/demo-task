@@ -1,15 +1,16 @@
-import { useState } from 'react';
-import { useEvents } from '@hooks/useEvents';
-import CreateEvent from './create-event';
+import CreateEvent from './CreateEvent';
+import EventList from './EventList';
 
 function Home() {
-  const [modalOpen, setModalOpen] = useState(false);
-  const { events } = useEvents();
-
   return (
-    <div className="d-flex flex-column align-items-center w-100">
-      <CreateEvent modalOpen={modalOpen} onClose={() => setModalOpen(false)} />
-    </div>
+    <>
+      <div className="d-flex justify-content-center">
+        <div className="col-12 col-md-10 col-lg-8 col-xl-8 h-100">
+          <CreateEvent />
+          <EventList />
+        </div>
+      </div>
+    </>
   );
 }
 

@@ -1,6 +1,6 @@
 import { faker } from '@faker-js/faker';
 import dayjs from 'dayjs';
-import { EventsType } from '../../types/events';
+import { EventType } from '../../types/events';
 import { PaginatedAPIResponse } from '../types';
 
 const localizedFormat = require('dayjs/plugin/localizedFormat');
@@ -9,25 +9,38 @@ dayjs.extend(localizedFormat);
 export const generateEvents = (
   page: number,
   pageSize: number,
-): PaginatedAPIResponse<EventsType> => {
+): PaginatedAPIResponse<EventType> => {
   const numArray = Array(pageSize).fill(0);
-  const response: PaginatedAPIResponse<EventsType> = {
+  const response: PaginatedAPIResponse<EventType> = {
     meta: {
       ...generatePaginationMeta(page, pageSize),
     },
-    result: numArray.map((_, idx): EventsType => {
+    result: numArray.map((_): EventType => {
       return {
-        id: idx,
+        id: faker.string.uuid(),
         name: faker.person.fullName(),
-        location: 'Dhaka',
         date: dayjs(faker.date.future()).format('L'),
         time: dayjs(faker.date.future()).format('HH:mm:ss'),
         description: faker.lorem.lines(),
+        like: faker.number.int(100),
       };
     }),
   };
 
   return response;
+};
+
+export const generateMockEventItem = (data: {
+  name: string;
+  description: string;
+  like: number;
+  date: string;
+}) => {
+  return {
+    id: faker.string.uuid(),
+    time: dayjs(faker.date.future()).format('HH:mm:ss'),
+    ...data,
+  };
 };
 
 const generatePaginationMeta = (page: number, pageSize: number) => ({

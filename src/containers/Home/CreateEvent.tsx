@@ -1,6 +1,6 @@
 import { useEffect } from 'react';
 import dayjs from 'dayjs';
-import { Button, InputText, Text } from '@pentabd/ui';
+import { Button, InputText, InputTextArea, Text } from '@pentabd/ui';
 import * as yup from 'yup';
 import { useForm, SubmitHandler } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
@@ -12,13 +12,8 @@ const EVENTS = FORM_FIELDS.EVENTS;
 
 type FormData = yup.InferType<typeof eventValidation>;
 
-interface Props {
-  modalOpen: boolean;
-  onClose: () => void;
-}
-
-function CreateEvent({ modalOpen, onClose }: Props) {
-  const { createRequested, createSuccess, createEvents } = useEvents();
+function CreateEvent() {
+  const { createRequested, createSuccess, createEvents } = useEvents({});
   const {
     handleSubmit,
     formState: { errors },
@@ -30,10 +25,10 @@ function CreateEvent({ modalOpen, onClose }: Props) {
   });
 
   const onSubmit: SubmitHandler<FormData> = (data: any) => {
-    console.log(data);
     const postData = {
       ...data,
-      date: dayjs(data.date).format('L'),
+      like: 0,
+      date: dayjs().format('L'),
     };
     createEvents(postData);
   };
@@ -41,7 +36,6 @@ function CreateEvent({ modalOpen, onClose }: Props) {
   useEffect(() => {
     if (createSuccess) {
       reset();
-      onClose();
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [createSuccess]);
@@ -56,7 +50,7 @@ function CreateEvent({ modalOpen, onClose }: Props) {
           error={errors ? errors?.[EVENTS.NAME]?.message : ''}
         />
 
-        <InputText
+        <InputTextArea
           {...register(EVENTS.DESCRIPTION)}
           placeholder="Description"
           error={errors ? errors?.[EVENTS.DESCRIPTION]?.message : ''}

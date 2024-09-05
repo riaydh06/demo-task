@@ -20,6 +20,7 @@ const createEventReducer = createSlice({
       };
     },
     createEventSuccess(state, action: PayloadAction<any>) {
+      console.log(action.payload);
       return {
         ...getSuccessState(),
       };

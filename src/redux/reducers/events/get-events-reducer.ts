@@ -1,3 +1,4 @@
+import { generateMockEventItem } from '@api/mock/events';
 import { getRequestingState, getFailedState } from './../../../utils/store';
 import { GetEventsState } from '@reducers/types/event-state';
 import { PayloadAction, createSlice } from '@reduxjs/toolkit';
@@ -15,7 +16,7 @@ const getEventsReducer = createSlice({
     },
     getEventsSuccess(state, action: PayloadAction<any>) {
       const { payload } = action;
-      console.log(payload);
+
       return {
         ...state,
         data: [...payload, ...(state.data ? state.data : [])],
@@ -26,10 +27,24 @@ const getEventsReducer = createSlice({
         ...getFailedState({ data: [] }),
       };
     },
+    createEventUpdate(state, action: PayloadAction<any>) {
+      console.log(action.payload);
+      return {
+        ...state,
+        data: [
+          { ...generateMockEventItem(action.payload) },
+          ...(state.data ? state.data : []),
+        ],
+      };
+    },
   },
 });
 
-export const { getEventsRequest, getEventsSuccess, getEventsFailed } =
-  getEventsReducer.actions;
+export const {
+  getEventsRequest,
+  getEventsSuccess,
+  getEventsFailed,
+  createEventUpdate,
+} = getEventsReducer.actions;
 
 export default getEventsReducer;

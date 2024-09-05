@@ -3,7 +3,6 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
-    "@ant-design/icons": "^5.0.1",
     "@craco/craco": "^7.1.0",
     "@faker-js/faker": "^8.0.1",
     "@hookform/error-message": "^2.0.1",

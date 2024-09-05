@@ -1,9 +1,9 @@
-import { EventsType } from '../../../types/events';
+import { EventType } from '../../../types/events';
 import { ReduxRequest } from './redux-request';
 
-export interface CreateEventState extends ReduxRequest<EventsType> {}
+export interface CreateEventState extends ReduxRequest<EventType> {}
 
-export interface GetEventsState extends ReduxRequest<EventsType[]> {}
+export interface GetEventsState extends ReduxRequest<EventType[]> {}
 
 export interface EventsState {
   createEvent: CreateEventState;

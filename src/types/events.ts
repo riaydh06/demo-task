@@ -1,8 +1,8 @@
-export interface EventsType {
-  id: number;
+export interface EventType {
+  id: string;
   name: string;
-  location: string;
-  date: string | Date;
-  time: string | Date;
+  date: string;
+  time: string;
   description: string;
+  like: number;
 }
