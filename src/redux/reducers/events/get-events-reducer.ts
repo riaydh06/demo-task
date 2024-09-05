@@ -2,7 +2,7 @@ import { generateMockEventItem } from '@api/mock/events';
 import { getRequestingState, getFailedState } from './../../../utils/store';
 import { GetEventsState } from '@reducers/types/event-state';
 import { PayloadAction, createSlice } from '@reduxjs/toolkit';
-import { stat } from 'fs';
+import { EventType } from '@type/events';
 
 const initialState: GetEventsState = {
   request: false,
@@ -58,6 +58,32 @@ const getEventsReducer = createSlice({
         data,
       };
     },
+
+    sortingByDate(state, action: PayloadAction<any>) {
+      const data = [...(state.data ? state.data : [])];
+
+      data?.sort(function (a: EventType, b: EventType) {
+        let c = new Date(a.date).getTime();
+        let d = new Date(b.date).getTime();
+        return c - d;
+      });
+
+      return {
+        ...state,
+        data,
+      };
+    },
+    sortingByName(state, action: PayloadAction<any>) {
+      const data = [...(state.data ? state.data : [])];
+
+      data?.sort(function (a: EventType, b: EventType) {
+        return a.name.localeCompare(b.name);
+      });
+      return {
+        ...state,
+        data,
+      };
+    },
   },
 });
 
@@ -67,6 +93,8 @@ export const {
   getEventsFailed,
   createEventsListUpdate,
   updateLike,
+  sortingByDate,
+  sortingByName,
 } = getEventsReducer.actions;
 
 export default getEventsReducer;

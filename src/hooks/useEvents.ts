@@ -6,6 +6,8 @@ import { useEffect } from 'react';
 import { createEventRequest } from '@reducers/events/create-event-reducer';
 import {
   getEventsRequest,
+  sortingByDate,
+  sortingByName,
   updateLike,
 } from '@reducers/events/get-events-reducer';
 import { EventType } from '@type/events';
@@ -16,6 +18,8 @@ interface UseEvents {
   events: EventType[];
   createEvents: (event: EventType) => void;
   updateLikeAction: (id: string) => void;
+  sortByNameAction: () => void;
+  sortByDateAction: () => void;
 }
 
 export const useEvents = ({
@@ -41,6 +45,8 @@ export const useEvents = ({
     dispatch(createEventRequest(event));
 
   const updateLikeAction = (id: string) => dispatch(updateLike(id));
+  const sortByNameAction = () => dispatch(sortingByName({}));
+  const sortByDateAction = () => dispatch(sortingByDate({}));
 
   return {
     createRequested,
@@ -48,5 +54,7 @@ export const useEvents = ({
     events: events,
     createEvents,
     updateLikeAction,
+    sortByDateAction,
+    sortByNameAction,
   };
 };

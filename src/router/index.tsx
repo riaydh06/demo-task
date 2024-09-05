@@ -4,8 +4,6 @@ import { routes } from './routes';
 
 import { RouteType } from './types';
 import { AllowedComponent } from './AllowedComponent';
-import { getStorage } from '@utils/local-store';
-import { LS_KEYS } from '@constants/local-store';
 
 export const AppRouter = () => {
   const buildRoute = (route: RouteType): ReactNode | null => {
