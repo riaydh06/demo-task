@@ -1,0 +1,15 @@
+{
+  "DASHBOARD": {
+    "DASHBOARD": "ড্যাশবোর্ড",
+    "EVENTS": "ঘটনা",
+    "NOTIFICATIONS": "বিজ্ঞপ্তি",
+    "ANALYTICS": "বিশ্লেষণ",
+    "REPORTS": "রিপোর্ট"
+  },
+  "EMPLOYEE": "কর্মচারী",
+  "TASKS": "কাজ",
+  "REPORTING": "রিপোর্টিং",
+  "USERS": "ব্যবহারকারী",
+  "SUPPORT": "সমর্থন",
+  "SETTINGS": "সেটিংস"
+}

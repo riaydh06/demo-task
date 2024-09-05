@@ -1,0 +1,15 @@
+{
+  "DASHBOARD": {
+    "DASHBOARD": "Dashboard",
+    "EVENTS": "Events",
+    "NOTIFICATIONS": "Notifications",
+    "ANALYTICS": "Analytics",
+    "REPORTS": "Reports"
+  },
+  "EMPLOYEE": "Employee",
+  "TASKS": "Tasks",
+  "REPORTING": "Reporting",
+  "USERS": "Users",
+  "SUPPORT": "Support",
+  "SETTINGS": "Settings"
+}
