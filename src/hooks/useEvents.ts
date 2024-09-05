@@ -4,7 +4,10 @@ import { getEventsState } from '@selectors/events-selector';
 import { EventsState } from '@reducers/types/event-state';
 import { useEffect } from 'react';
 import { createEventRequest } from '@reducers/events/create-event-reducer';
-import { getEventsRequest } from '@reducers/events/get-events-reducer';
+import {
+  getEventsRequest,
+  updateLike,
+} from '@reducers/events/get-events-reducer';
 import { EventType } from '@type/events';
 
 interface UseEvents {
@@ -12,6 +15,7 @@ interface UseEvents {
   createSuccess: boolean;
   events: EventType[];
   createEvents: (event: EventType) => void;
+  updateLikeAction: (id: string) => void;
 }
 
 export const useEvents = ({
@@ -36,10 +40,13 @@ export const useEvents = ({
   const createEvents = (event: EventType) =>
     dispatch(createEventRequest(event));
 
+  const updateLikeAction = (id: string) => dispatch(updateLike(id));
+
   return {
     createRequested,
     createSuccess,
     events: events,
     createEvents,
+    updateLikeAction,
   };
 };

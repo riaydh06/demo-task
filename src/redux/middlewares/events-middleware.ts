@@ -9,7 +9,7 @@ import {
 import {
   getEventsSuccess,
   getEventsFailed,
-  createEventUpdate,
+  createEventsListUpdate,
 } from '@reducers/events/get-events-reducer';
 
 export const eventsMiddleware: Middleware<
@@ -27,7 +27,7 @@ export const eventsMiddleware: Middleware<
             await createEvents(payload);
 
             dispatch(createEventSuccess(payload));
-            dispatch(createEventUpdate(payload));
+            dispatch(createEventsListUpdate(payload));
           } catch (error) {
             if (!isRequestCancelled(error)) {
               dispatch(createEventFailed({}));
